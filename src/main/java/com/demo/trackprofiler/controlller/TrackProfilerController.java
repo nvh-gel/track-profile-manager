@@ -1,14 +1,22 @@
 package com.demo.trackprofiler.controlller;
 
+import com.demo.trackprofiler.domain.model.Track;
 import com.demo.trackprofiler.domain.viewmodel.TrackListVM;
 import com.demo.trackprofiler.domain.viewmodel.TrackVM;
+import com.demo.trackprofiler.service.TrackService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "api/track")
 public class TrackProfilerController {
+
+    @Autowired
+    TrackService trackService;
 
 
     @PostMapping(value = "/upload")
@@ -18,7 +26,7 @@ public class TrackProfilerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<TrackVM> getTrackDetails(@PathVariable(value = "id") Integer trackId) {
-        return new ResponseEntity<>(new TrackVM(), HttpStatus.OK);
+        return new ResponseEntity<>(trackService.findTrackById(trackId), HttpStatus.OK);
     }
 
     @GetMapping
@@ -27,5 +35,8 @@ public class TrackProfilerController {
         return new ResponseEntity<>(new TrackListVM(), HttpStatus.OK);
     }
 
-
+    @GetMapping(value = "/test")
+    public ResponseEntity<List<Track>> getTrackModels() {
+        return new ResponseEntity<>(trackService.findAllTrackModels(), HttpStatus.OK);
+    }
 }

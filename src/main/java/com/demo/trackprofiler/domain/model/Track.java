@@ -1,28 +1,26 @@
 package com.demo.trackprofiler.domain.model;
 
-import com.demo.trackprofiler.utils.Link;
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.List;
 
+@Entity
 public class Track {
+
+    @Id
     private int trackId;
 
     // metadata
     private String name;
     private String description;
     private String author;
-    private Link link;
+    private String url;
+    private String urlText;
     private LocalDateTime time;
 
-    // waypoints
-    private List<Waypoint> waypoints;
-
-    // trackpoints
-    private List<TrackPoint> trackPoints;
-
-
-    // Getters and Setters
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
 
     public int getTrackId() {
         return trackId;
@@ -56,12 +54,20 @@ public class Track {
         this.author = author;
     }
 
-    public Link getLink() {
-        return link;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLink(Link link) {
-        this.link = link;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUrlText() {
+        return urlText;
+    }
+
+    public void setUrlText(String urlText) {
+        this.urlText = urlText;
     }
 
     public LocalDateTime getTime() {
@@ -70,21 +76,5 @@ public class Track {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
-    }
-
-    public List<Waypoint> getWaypoints() {
-        return waypoints;
-    }
-
-    public void setWaypoints(List<Waypoint> waypoints) {
-        this.waypoints = waypoints;
-    }
-
-    public List<TrackPoint> getTrackPoints() {
-        return trackPoints;
-    }
-
-    public void setTrackPoints(List<TrackPoint> trackPoints) {
-        this.trackPoints = trackPoints;
     }
 }
