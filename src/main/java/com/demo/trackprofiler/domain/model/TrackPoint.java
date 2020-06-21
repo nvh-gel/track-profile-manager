@@ -13,6 +13,8 @@ public class TrackPoint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int trackPointId;
 
+    private int trackId;
+
     private BigDecimal latitude;
     private BigDecimal longitude;
     private BigDecimal elevation;
@@ -24,6 +26,14 @@ public class TrackPoint {
 
     public void setTrackPointId(int trackPointId) {
         this.trackPointId = trackPointId;
+    }
+
+    public int getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(int trackId) {
+        this.trackId = trackId;
     }
 
     public BigDecimal getLatitude() {

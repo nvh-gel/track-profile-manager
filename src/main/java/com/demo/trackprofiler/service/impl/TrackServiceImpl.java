@@ -1,6 +1,8 @@
 package com.demo.trackprofiler.service.impl;
 
 import com.demo.trackprofiler.domain.model.Track;
+import com.demo.trackprofiler.domain.model.TrackPoint;
+import com.demo.trackprofiler.domain.repository.TrackPointRepository;
 import com.demo.trackprofiler.domain.repository.TrackRepository;
 import com.demo.trackprofiler.domain.viewmodel.TrackListVM;
 import com.demo.trackprofiler.domain.viewmodel.TrackVM;
@@ -17,6 +19,9 @@ public class TrackServiceImpl implements TrackService {
 
     @Autowired
     private TrackRepository trackRepository;
+
+    @Autowired
+    private TrackPointRepository trackPointRepository;
 
     @Autowired
     private DozerBeanMapper dozerBeanMapper;
@@ -36,6 +41,8 @@ public class TrackServiceImpl implements TrackService {
         Track track = trackRepository.findOne(trackId);
         dozerBeanMapper.map(track, trackVM);
         trackVM.setLink(dozerBeanMapper.map(track, Link.class));
+        List<TrackPoint> trackPoints = trackPointRepository.findAllByTrackId(trackId);
+        dozerBeanMapper.map(trackPoints.toArray(), trackVM);
         return trackVM;
     }
 
