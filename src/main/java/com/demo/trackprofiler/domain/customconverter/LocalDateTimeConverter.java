@@ -1,4 +1,4 @@
-package com.demo.trackprofiler.utils;
+package com.demo.trackprofiler.domain.customconverter;
 
 import org.dozer.CustomConverter;
 
@@ -12,7 +12,7 @@ public class LocalDateTimeConverter implements CustomConverter {
             return null;
         }
         if (src instanceof LocalDateTime) {
-            return src;
+            return src.toString();
         }
         return null;
     }

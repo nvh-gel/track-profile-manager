@@ -11,4 +11,5 @@ CREATE TABLE track (
 );
 
 INSERT INTO track(name, description, author, url, url_text, time)
-VALUES ('test', 'test desc', 'nvhien', 'http://test.com', 'Test url', current_timestamp);
+VALUES ('test', 'test desc', 'nvhien', 'http://test.com', 'Test url', current_timestamp),
+       ('Aeuja High Road', 'Track for Aeuja High Road', 'kclerey', 'http://graphhopper.com', 'GraphHopper GPX', parsedatetime('2020-06-18 15:15:45', 'yyyy-MM-dd HH:mm:ss'));

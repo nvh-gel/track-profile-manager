@@ -1,6 +1,5 @@
 package com.demo.trackprofiler.controlller;
 
-import com.demo.trackprofiler.domain.model.Track;
 import com.demo.trackprofiler.domain.viewmodel.TrackListVM;
 import com.demo.trackprofiler.domain.viewmodel.TrackVM;
 import com.demo.trackprofiler.service.TrackService;
@@ -8,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "api/track")
@@ -32,11 +29,8 @@ public class TrackProfilerController {
     @GetMapping
     public ResponseEntity<TrackListVM> getRecentTracks(@RequestParam(value = "userId", required = false) Integer userId,
                                                        @RequestParam(value = "page", required = false) Integer page) {
-        return new ResponseEntity<>(new TrackListVM(), HttpStatus.OK);
-    }
+        TrackListVM trackListVM = trackService.findAllTracks();
 
-    @GetMapping(value = "/test")
-    public ResponseEntity<List<Track>> getTrackModels() {
-        return new ResponseEntity<>(trackService.findAllTrackModels(), HttpStatus.OK);
+        return new ResponseEntity<>(trackListVM, HttpStatus.OK);
     }
 }

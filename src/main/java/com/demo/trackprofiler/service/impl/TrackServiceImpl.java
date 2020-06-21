@@ -5,6 +5,7 @@ import com.demo.trackprofiler.domain.repository.TrackRepository;
 import com.demo.trackprofiler.domain.viewmodel.TrackListVM;
 import com.demo.trackprofiler.domain.viewmodel.TrackVM;
 import com.demo.trackprofiler.service.TrackService;
+import com.demo.trackprofiler.utils.Link;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,17 +24,10 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public TrackListVM findAllTracks() {
         TrackListVM trackListVM = new TrackListVM();
-
         List<Track> trackList = trackRepository.findAll();
 
         dozerBeanMapper.map(trackList, trackListVM);
-
         return trackListVM;
-    }
-
-    @Override
-    public List<Track> findAllTrackModels() {
-        return trackRepository.findAll();
     }
 
     @Override
@@ -41,6 +35,7 @@ public class TrackServiceImpl implements TrackService {
         TrackVM trackVM = new TrackVM();
         Track track = trackRepository.findOne(trackId);
         dozerBeanMapper.map(track, trackVM);
+        trackVM.setLink(dozerBeanMapper.map(track, Link.class));
         return trackVM;
     }
 

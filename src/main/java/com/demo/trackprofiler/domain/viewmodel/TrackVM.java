@@ -2,8 +2,6 @@ package com.demo.trackprofiler.domain.viewmodel;
 
 import com.demo.trackprofiler.utils.Link;
 
-import java.time.LocalDateTime;
-
 public class TrackVM {
     private int trackId;
 
@@ -12,7 +10,7 @@ public class TrackVM {
     private String description;
     private String author;
     private Link link;
-    private LocalDateTime time;
+    private String time;
 
     public int getTrackId() {
         return trackId;
@@ -54,11 +52,11 @@ public class TrackVM {
         this.link = link;
     }
 
-    public LocalDateTime getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(LocalDateTime time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

@@ -10,15 +10,11 @@ public class TrackListVM {
         this.tracks = new ArrayList<>();
     }
 
-    public TrackListVM(List<TrackVM> trackVMS) {
-        this.tracks = trackVMS;
-    }
-
     public List<TrackVM> getTracks() {
         return tracks;
     }
 
     public void setTracks(List<TrackVM> tracks) {
-        this.tracks = tracks;
+        this.tracks.addAll(tracks);
     }
 }
