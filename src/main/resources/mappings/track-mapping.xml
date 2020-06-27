@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://dozer.sourceforge.net"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://dozer.sourceforge.net
+      http://dozer.sourceforge.net/schema/beanmapping.xsd">
+    <mapping>
+        <class-a>com.demo.trackprofiler.domain.model.Track</class-a>
+        <class-b>com.demo.trackprofiler.domain.viewmodel.TrackMetadataVM</class-b>
+        <field>
+            <a>description</a>
+            <b>desc</b>
+        </field>
+        <field custom-converter="com.demo.trackprofiler.domain.customconverter.LocalDateTimeConverter">
+            <a>time</a>
+            <b>time</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.demo.trackprofiler.domain.model.Track</class-a>
+        <class-b>com.demo.trackprofiler.utils.Link</class-b>
+        <field>
+            <a>urlText</a>
+            <b>text</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>com.demo.trackprofiler.domain.model.TrackPoint</class-a>
+        <class-b>com.demo.trackprofiler.domain.viewmodel.TrackPointVM</class-b>
+        <field custom-converter="com.demo.trackprofiler.domain.customconverter.LocalDateTimeConverter">
+            <a>time</a>
+            <b>time</b>
+        </field>
+    </mapping>
+</mappings>
