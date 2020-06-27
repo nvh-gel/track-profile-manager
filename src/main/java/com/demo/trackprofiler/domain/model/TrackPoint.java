@@ -4,20 +4,25 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Model to hold track point data contained inside track
+ */
 @Entity
 public class TrackPoint {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer trackPointId;
 
-    @ManyToOne
-    @JoinColumn(name = "track_id", nullable = false)
-    private Track track;
-
+    private Integer trackId;
     private BigDecimal latitude;
     private BigDecimal longitude;
     private BigDecimal elevation;
     private LocalDateTime time;
+
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
 
     public Integer getTrackPointId() {
         return trackPointId;
@@ -27,12 +32,12 @@ public class TrackPoint {
         this.trackPointId = trackPointId;
     }
 
-    public Track getTrack() {
-        return track;
+    public Integer getTrackId() {
+        return trackId;
     }
 
-    public void setTrack(Track track) {
-        this.track = track;
+    public void setTrackId(Integer trackId) {
+        this.trackId = trackId;
     }
 
     public BigDecimal getLatitude() {

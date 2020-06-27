@@ -5,11 +5,20 @@ import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * View models that contain track point data that is received from user or will be showed to user
+ * Utilizing annotation to map with the uploaded gpx file
+ */
 public class TrackPointVM {
+
     private BigDecimal latitude;
     private BigDecimal longitude;
     private BigDecimal elevation;
     private Date time;
+
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
 
     @XmlAttribute(name = "lat")
     public BigDecimal getLatitude() {

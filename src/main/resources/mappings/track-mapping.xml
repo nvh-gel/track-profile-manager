@@ -3,14 +3,6 @@
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://dozer.sourceforge.net
       http://dozer.sourceforge.net/schema/beanmapping.xsd">
-    <configuration>
-        <custom-converters>
-            <converter type="com.demo.trackprofiler.domain.customconverter.TrackListConverter">
-                <class-a>java.util.List</class-a>
-                <class-b>com.demo.trackprofiler.domain.viewmodel.TrackListVM</class-b>
-            </converter>
-        </custom-converters>
-    </configuration>
     <mapping>
         <class-a>com.demo.trackprofiler.domain.model.Track</class-a>
         <class-b>com.demo.trackprofiler.domain.viewmodel.TrackMetadataVM</class-b>

@@ -4,13 +4,16 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Model to hold the data for track.
+ */
 @Entity
 @Table(name = "track")
 public class Track {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int trackId;
+    private Integer trackId;
 
     // metadata
     private String name;
@@ -20,28 +23,21 @@ public class Track {
     private String urlText;
     private LocalDateTime time;
 
-    @OneToMany(
-            mappedBy = "track",
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL
-    )
+    @Transient
     private List<Waypoint> waypoints;
 
-    @OneToMany(
-            mappedBy = "track",
-            fetch = FetchType.LAZY
-    )
+    @Transient
     private List<TrackPoint> trackPoints;
 
     /*----------------------------------*
      Getters and Setters
      *----------------------------------*/
 
-    public int getTrackId() {
+    public Integer getTrackId() {
         return trackId;
     }
 
-    public void setTrackId(int trackId) {
+    public void setTrackId(Integer trackId) {
         this.trackId = trackId;
     }
 

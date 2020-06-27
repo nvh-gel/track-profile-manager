@@ -4,31 +4,31 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+/**
+ * View models that contain track data that is received from user or will be showed to user
+ * Utilizing annotation to map with the uploaded gpx file
+ */
 @XmlRootElement(name = "gpx")
 public class TrackVM {
 
-    private int trackId;
+    private Integer trackId;
 
+    // metadata
     private TrackMetadataVM metadata;
-
     // waypoints
     private List<WaypointVM> waypoints;
-
     // track points
     private TrackSegmentsVM trackSegments;
 
-    // Constructors
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
 
-    public TrackVM() {}
-
-
-    // Getter and Setter
-
-    public int getTrackId() {
+    public Integer getTrackId() {
         return trackId;
     }
 
-    public void setTrackId(int trackId) {
+    public void setTrackId(Integer trackId) {
         this.trackId = trackId;
     }
 

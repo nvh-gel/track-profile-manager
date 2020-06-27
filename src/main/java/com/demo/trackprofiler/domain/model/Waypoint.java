@@ -4,6 +4,9 @@ package com.demo.trackprofiler.domain.model;
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+/**
+ * Model to hold data of waypoints in a track
+ */
 @Entity
 @Table(name = "waypoint")
 public class Waypoint {
@@ -12,14 +15,15 @@ public class Waypoint {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer waypointId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "track_id", nullable = false)
-    private Track track;
-
+    private Integer trackId;
     private BigDecimal latitude;
     private BigDecimal longitude;
     private String name;
     private String symbol;
+
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
 
     public Integer getWaypointId() {
         return waypointId;
@@ -27,6 +31,14 @@ public class Waypoint {
 
     public void setWaypointId(Integer waypointId) {
         this.waypointId = waypointId;
+    }
+
+    public Integer getTrackId() {
+        return trackId;
+    }
+
+    public void setTrackId(Integer trackId) {
+        this.trackId = trackId;
     }
 
     public BigDecimal getLatitude() {
@@ -59,14 +71,6 @@ public class Waypoint {
 
     public void setSymbol(String symbol) {
         this.symbol = symbol;
-    }
-
-    public Track getTrack() {
-        return track;
-    }
-
-    public void setTrack(Track track) {
-        this.track = track;
     }
 }
 

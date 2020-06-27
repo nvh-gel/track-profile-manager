@@ -4,11 +4,20 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import java.math.BigDecimal;
 
+/**
+ * View models that contain waypoints data that is received from user or will be showed to user
+ * Utilizing annotation to map with the uploaded gpx file
+ */
 public class WaypointVM {
+
     private BigDecimal latitude;
     private BigDecimal longitude;
     private String name;
     private String symbol;
+
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
 
     @XmlAttribute(name = "lat")
     public BigDecimal getLatitude() {

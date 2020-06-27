@@ -11,13 +11,5 @@
                 <value>\\mappings\track-mapping.xml</value>
             </list>
         </property>
-        <property name="customConverters">
-            <list>
-                <ref bean="customConverterTrackList"/>
-            </list>
-        </property>
     </bean>
-
-    <bean id="customConverterTrackList" class="com.demo.trackprofiler.domain.customconverter.TrackListConverter"/>
-
 </beans>

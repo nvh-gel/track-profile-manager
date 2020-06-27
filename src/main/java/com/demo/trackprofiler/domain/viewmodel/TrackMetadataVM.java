@@ -4,9 +4,12 @@ import com.demo.trackprofiler.utils.Link;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
+/**
+ * View models that contain track metadata that is received from user or will be showed to user
+ * Utilizing annotation to map with the uploaded gpx file
+ */
 @XmlRootElement
 public class TrackMetadataVM {
 
@@ -16,18 +19,9 @@ public class TrackMetadataVM {
     private Link link;
     private Date time;
 
-    public TrackMetadataVM() {
-    }
-
-    public TrackMetadataVM(String name, String description, String author, Link link, Date time) {
-        this.name = name;
-        this.desc = description;
-        this.author = author;
-        this.link = link;
-        this.time = time;
-    }
-
-    /* Getter and Setter */
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
 
     @XmlElement
     public String getName() {

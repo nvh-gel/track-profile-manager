@@ -1,6 +1,5 @@
 package com.demo.trackprofiler.controlller;
 
-import com.demo.trackprofiler.domain.viewmodel.TrackListVM;
 import com.demo.trackprofiler.domain.viewmodel.TrackVM;
 import com.demo.trackprofiler.service.TrackService;
 import org.slf4j.Logger;
@@ -10,49 +9,72 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
+import java.util.List;
 
+/**
+ * Rest Controller for API to upload, view details, view list of tracks
+ */
 @RestController
 @RequestMapping(value = "api/track")
 public class TrackProfilerController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(TrackProfilerController.class);
+
     @Autowired
     TrackService trackService;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(TrackProfilerController.class);
-
-
-
+    /**
+     * API to upload gpx file and process the data
+     *
+     * @param file file to upload
+     * @return String to represent the upload status
+     */
     @PostMapping(value = "/upload")
-    public ResponseEntity<String> uploadTrack(@RequestParam("file") MultipartFile file,
-                                              RedirectAttributes redirectAttributes) throws IOException, JAXBException {
+    public ResponseEntity<String> uploadTrack(@RequestParam("file") MultipartFile file) {
 
         if (file.isEmpty()) {
-            return new ResponseEntity<>("PLease seclect a valid gpx file to upload.", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("PLease select a valid gpx file to upload.", HttpStatus.BAD_REQUEST);
         }
         try {
             trackService.processUploadedFile(file);
             return new ResponseEntity<>("You successfully uploaded '" + file.getOriginalFilename() + "'", HttpStatus.ACCEPTED);
-        } catch(Exception exception) {
+        } catch (IOException exception) {
             LOGGER.error(exception.getMessage());
-            throw exception;
-//            return new ResponseEntity<>("Internal server error.", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Internal server error: " + exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (JAXBException exception) {
+            LOGGER.error(exception.getMessage());
+            return new ResponseEntity<>("Internal server error when processing gpx file: " + exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
+    /**
+     * Get details info of a track.
+     *
+     * @param trackId track ID
+     * @return track info if found, or else return http code 404
+     */
     @GetMapping("/{id}")
     public ResponseEntity<TrackVM> getTrackDetails(@PathVariable(value = "id") Integer trackId) {
-        return new ResponseEntity<>(trackService.findTrackById(trackId), HttpStatus.OK);
+        TrackVM trackVM = trackService.findTrackById(trackId);
+
+        if (trackVM != null) {
+            return new ResponseEntity<>(trackVM, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    /**
+     * Get list of tracks in database.
+     *
+     * @return list of retrieved tracks
+     */
     @GetMapping
-    public ResponseEntity<TrackListVM> getRecentTracks(@RequestParam(value = "userId", required = false) Integer userId,
-                                                       @RequestParam(value = "page", required = false) Integer page) {
-        TrackListVM trackListVM = trackService.findAllTracks();
+    public ResponseEntity<List<TrackVM>> getRecentTracks() {
+        List<TrackVM> tracks = trackService.findAllTracks();
 
-        return new ResponseEntity<>(trackListVM, HttpStatus.OK);
+        return new ResponseEntity<>(tracks, HttpStatus.OK);
     }
 }

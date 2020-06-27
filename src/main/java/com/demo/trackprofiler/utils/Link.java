@@ -3,6 +3,9 @@ package com.demo.trackprofiler.utils;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+/**
+ * View class to hold the data for link of track
+ */
 public class Link {
     private String url;
     private String text;
