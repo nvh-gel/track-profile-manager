@@ -28,7 +28,7 @@ public class TrackListConverter implements CustomConverter {
                 if (track != null) {
                     TrackVM trackVM = new TrackVM();
                     dozerBeanMapper.map(track, trackVM);
-                    trackVM.setLink(dozerBeanMapper.map(track, Link.class));
+//                    trackVM.setLink(dozerBeanMapper.map(track, Link.class));
                     return trackVM;
                 } else {
                     return null;

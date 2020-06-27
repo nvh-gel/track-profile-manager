@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackListVM {
-    List<TrackVM> tracks;
+    private List<TrackVM> tracks;
 
     public TrackListVM() {
         this.tracks = new ArrayList<>();

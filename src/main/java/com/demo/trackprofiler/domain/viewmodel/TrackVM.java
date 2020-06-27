@@ -1,16 +1,28 @@
 package com.demo.trackprofiler.domain.viewmodel;
 
-import com.demo.trackprofiler.utils.Link;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
+@XmlRootElement(name = "gpx")
 public class TrackVM {
+
     private int trackId;
 
-    // metadata
-    private String name;
-    private String description;
-    private String author;
-    private Link link;
-    private String time;
+    private TrackMetadataVM metadata;
+
+    // waypoints
+    private List<WaypointVM> waypoints;
+
+    // track points
+    private TrackSegmentsVM trackSequenceVM;
+
+    // Constructors
+
+    public TrackVM() {}
+
+
+    // Getter and Setter
 
     public int getTrackId() {
         return trackId;
@@ -20,43 +32,30 @@ public class TrackVM {
         this.trackId = trackId;
     }
 
-    public String getName() {
-        return name;
+    @XmlElement
+    public TrackMetadataVM getMetadata() {
+        return metadata;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMetadata(TrackMetadataVM metadata) {
+        this.metadata = metadata;
     }
 
-    public String getDescription() {
-        return description;
+    @XmlElement(name = "wpt")
+    public List<WaypointVM> getWaypoints() {
+        return waypoints;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setWaypoints(List<WaypointVM> waypoints) {
+        this.waypoints = waypoints;
     }
 
-    public String getAuthor() {
-        return author;
+    @XmlElement(name = "trk")
+    public TrackSegmentsVM getTrackSequenceVM() {
+        return trackSequenceVM;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public Link getLink() {
-        return link;
-    }
-
-    public void setLink(Link link) {
-        this.link = link;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void setTrackSequenceVM(TrackSegmentsVM trackSequenceVM) {
+        this.trackSequenceVM = trackSequenceVM;
     }
 }
