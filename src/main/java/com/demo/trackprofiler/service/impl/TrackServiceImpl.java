@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,9 +54,8 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public List<TrackVM> findAllTracks() {
 
-        // retrieve all tracks
-        List<Track> tracks = new ArrayList<>();
-        trackRepository.findAll().forEach(tracks::add);
+        // retrieve all latest tracks
+        List<Track> tracks = trackRepository.findAllByOrderByTimeDesc();
 
         // map metadata and link to track list and return VM list
         return tracks.stream().map(track -> {
