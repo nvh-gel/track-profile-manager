@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,9 +54,8 @@ public class TrackServiceImpl implements TrackService {
     @Override
     public List<TrackVM> findAllTracks() {
 
-        // retrieve all tracks
-        List<Track> tracks = new ArrayList<>();
-        trackRepository.findAll().forEach(tracks::add);
+        // retrieve all latest tracks
+        List<Track> tracks = trackRepository.findAllByOrderByTimeDesc();
 
         // map metadata and link to track list and return VM list
         return tracks.stream().map(track -> {
@@ -143,24 +141,26 @@ public class TrackServiceImpl implements TrackService {
         // persist track to database
         Track result = trackRepository.save(trackModel);
 
+        if (result != null) {
         /* Because Dozer mapping for collection is limited and may causes issues,
            we have to iterate and map one by one for waypoints and track points */
-        List<Waypoint> waypoints = trackVM.getWaypoints().stream().map(wp -> {
-            Waypoint waypoint = new Waypoint();
-            dozerBeanMapper.map(wp, waypoint);
-            waypoint.setTrackId(result.getTrackId());
-            return waypoint;
-        }).collect(Collectors.toList());
+            List<Waypoint> waypoints = trackVM.getWaypoints().stream().map(wp -> {
+                Waypoint waypoint = new Waypoint();
+                dozerBeanMapper.map(wp, waypoint);
+                waypoint.setTrackId(result.getTrackId());
+                return waypoint;
+            }).collect(Collectors.toList());
 
-        List<TrackPoint> trackPoints = trackVM.getTrackSegments().getTrackPoints().stream().map(tp -> {
-            TrackPoint trackPoint = new TrackPoint();
-            dozerBeanMapper.map(tp, trackPoint);
-            trackPoint.setTrackId(result.getTrackId());
-            return trackPoint;
-        }).collect(Collectors.toList());
+            List<TrackPoint> trackPoints = trackVM.getTrackSegments().getTrackPoints().stream().map(tp -> {
+                TrackPoint trackPoint = new TrackPoint();
+                dozerBeanMapper.map(tp, trackPoint);
+                trackPoint.setTrackId(result.getTrackId());
+                return trackPoint;
+            }).collect(Collectors.toList());
 
-        // persist waypoints and track points to database
-        waypointRepository.save(waypoints);
-        trackPointRepository.save(trackPoints);
+            // persist waypoints and track points to database
+            waypointRepository.save(waypoints);
+            trackPointRepository.save(trackPoints);
+        }
     }
 }
