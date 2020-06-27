@@ -15,7 +15,7 @@ public class TrackVM {
     private List<WaypointVM> waypoints;
 
     // track points
-    private TrackSegmentsVM trackSequenceVM;
+    private TrackSegmentsVM trackSegments;
 
     // Constructors
 
@@ -51,11 +51,11 @@ public class TrackVM {
     }
 
     @XmlElement(name = "trk")
-    public TrackSegmentsVM getTrackSequenceVM() {
-        return trackSequenceVM;
+    public TrackSegmentsVM getTrackSegments() {
+        return trackSegments;
     }
 
-    public void setTrackSequenceVM(TrackSegmentsVM trackSequenceVM) {
-        this.trackSequenceVM = trackSequenceVM;
+    public void setTrackSegments(TrackSegmentsVM trackSegments) {
+        this.trackSegments = trackSegments;
     }
 }

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+
 @RestController
 @RequestMapping(value = "api/track")
 public class TrackProfilerController {
@@ -25,7 +28,7 @@ public class TrackProfilerController {
 
     @PostMapping(value = "/upload")
     public ResponseEntity<String> uploadTrack(@RequestParam("file") MultipartFile file,
-                                              RedirectAttributes redirectAttributes) {
+                                              RedirectAttributes redirectAttributes) throws IOException, JAXBException {
 
         if (file.isEmpty()) {
             return new ResponseEntity<>("PLease seclect a valid gpx file to upload.", HttpStatus.BAD_REQUEST);
@@ -35,7 +38,8 @@ public class TrackProfilerController {
             return new ResponseEntity<>("You successfully uploaded '" + file.getOriginalFilename() + "'", HttpStatus.ACCEPTED);
         } catch(Exception exception) {
             LOGGER.error(exception.getMessage());
-            return new ResponseEntity<>("Internal server error.", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw exception;
+//            return new ResponseEntity<>("Internal server error.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

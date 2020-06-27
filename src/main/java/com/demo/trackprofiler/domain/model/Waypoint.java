@@ -1,27 +1,31 @@
 package com.demo.trackprofiler.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "waypoint")
 public class Waypoint {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int waypointId;
+    private Integer waypointId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "track_id", nullable = false)
+    private Track track;
 
     private BigDecimal latitude;
     private BigDecimal longitude;
     private String name;
     private String symbol;
 
-    public int getWaypointId() {
+    public Integer getWaypointId() {
         return waypointId;
     }
 
-    public void setWaypointId(int waypointId) {
+    public void setWaypointId(Integer waypointId) {
         this.waypointId = waypointId;
     }
 
@@ -56,4 +60,13 @@ public class Waypoint {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+
+    public Track getTrack() {
+        return track;
+    }
+
+    public void setTrack(Track track) {
+        this.track = track;
+    }
 }
+

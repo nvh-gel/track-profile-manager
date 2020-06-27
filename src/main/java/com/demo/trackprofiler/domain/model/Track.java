@@ -1,13 +1,15 @@
 package com.demo.trackprofiler.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Table(name = "track")
 public class Track {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int trackId;
 
     // metadata
@@ -17,6 +19,19 @@ public class Track {
     private String url;
     private String urlText;
     private LocalDateTime time;
+
+    @OneToMany(
+            mappedBy = "track",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
+    private List<Waypoint> waypoints;
+
+    @OneToMany(
+            mappedBy = "track",
+            fetch = FetchType.LAZY
+    )
+    private List<TrackPoint> trackPoints;
 
     /*----------------------------------*
      Getters and Setters
@@ -76,5 +91,21 @@ public class Track {
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    public List<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<Waypoint> waypoints) {
+        this.waypoints = waypoints;
+    }
+
+    public List<TrackPoint> getTrackPoints() {
+        return trackPoints;
+    }
+
+    public void setTrackPoints(List<TrackPoint> trackPoints) {
+        this.trackPoints = trackPoints;
     }
 }

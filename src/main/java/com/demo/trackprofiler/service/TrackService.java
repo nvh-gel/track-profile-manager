@@ -9,6 +9,8 @@ import java.io.IOException;
 
 public interface TrackService {
     TrackListVM findAllTracks();
+
     TrackVM findTrackById(Integer trackId);
+
     void processUploadedFile(MultipartFile file) throws IOException, JAXBException;
 }

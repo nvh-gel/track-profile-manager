@@ -6,15 +6,15 @@ import java.util.List;
 
 public class TrackSegmentsVM {
 
-    private List<TrackPointVM> trackPointVMs;
+    private List<TrackPointVM> trackPoints;
 
     @XmlElementWrapper(name = "trkseg")
     @XmlElement(name = "trkpt")
-    public List<TrackPointVM> getTrackPointVMs() {
-        return trackPointVMs;
+    public List<TrackPointVM> getTrackPoints() {
+        return trackPoints;
     }
 
-    public void setTrackPointVMs(List<TrackPointVM> trackPointVMs) {
-        this.trackPointVMs = trackPointVMs;
+    public void setTrackPoints(List<TrackPointVM> trackPoints) {
+        this.trackPoints = trackPoints;
     }
 }

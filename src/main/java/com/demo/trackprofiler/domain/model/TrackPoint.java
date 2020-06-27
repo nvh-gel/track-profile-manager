@@ -1,9 +1,6 @@
 package com.demo.trackprofiler.domain.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -11,29 +8,31 @@ import java.time.LocalDateTime;
 public class TrackPoint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int trackPointId;
+    private Integer trackPointId;
 
-    private int trackId;
+    @ManyToOne
+    @JoinColumn(name = "track_id", nullable = false)
+    private Track track;
 
     private BigDecimal latitude;
     private BigDecimal longitude;
     private BigDecimal elevation;
     private LocalDateTime time;
 
-    public int getTrackPointId() {
+    public Integer getTrackPointId() {
         return trackPointId;
     }
 
-    public void setTrackPointId(int trackPointId) {
+    public void setTrackPointId(Integer trackPointId) {
         this.trackPointId = trackPointId;
     }
 
-    public int getTrackId() {
-        return trackId;
+    public Track getTrack() {
+        return track;
     }
 
-    public void setTrackId(int trackId) {
-        this.trackId = trackId;
+    public void setTrack(Track track) {
+        this.track = track;
     }
 
     public BigDecimal getLatitude() {
