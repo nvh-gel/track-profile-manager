@@ -141,24 +141,26 @@ public class TrackServiceImpl implements TrackService {
         // persist track to database
         Track result = trackRepository.save(trackModel);
 
+        if (result != null) {
         /* Because Dozer mapping for collection is limited and may causes issues,
            we have to iterate and map one by one for waypoints and track points */
-        List<Waypoint> waypoints = trackVM.getWaypoints().stream().map(wp -> {
-            Waypoint waypoint = new Waypoint();
-            dozerBeanMapper.map(wp, waypoint);
-            waypoint.setTrackId(result.getTrackId());
-            return waypoint;
-        }).collect(Collectors.toList());
+            List<Waypoint> waypoints = trackVM.getWaypoints().stream().map(wp -> {
+                Waypoint waypoint = new Waypoint();
+                dozerBeanMapper.map(wp, waypoint);
+                waypoint.setTrackId(result.getTrackId());
+                return waypoint;
+            }).collect(Collectors.toList());
 
-        List<TrackPoint> trackPoints = trackVM.getTrackSegments().getTrackPoints().stream().map(tp -> {
-            TrackPoint trackPoint = new TrackPoint();
-            dozerBeanMapper.map(tp, trackPoint);
-            trackPoint.setTrackId(result.getTrackId());
-            return trackPoint;
-        }).collect(Collectors.toList());
+            List<TrackPoint> trackPoints = trackVM.getTrackSegments().getTrackPoints().stream().map(tp -> {
+                TrackPoint trackPoint = new TrackPoint();
+                dozerBeanMapper.map(tp, trackPoint);
+                trackPoint.setTrackId(result.getTrackId());
+                return trackPoint;
+            }).collect(Collectors.toList());
 
-        // persist waypoints and track points to database
-        waypointRepository.save(waypoints);
-        trackPointRepository.save(trackPoints);
+            // persist waypoints and track points to database
+            waypointRepository.save(waypoints);
+            trackPointRepository.save(trackPoints);
+        }
     }
 }

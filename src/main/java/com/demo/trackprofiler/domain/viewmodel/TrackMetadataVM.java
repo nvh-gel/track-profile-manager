@@ -20,6 +20,33 @@ public class TrackMetadataVM {
     private Date time;
 
     /*----------------------------------*
+     Constructors
+     *----------------------------------*/
+
+    public TrackMetadataVM() {
+    }
+
+    public TrackMetadataVM(String name, String desc, String author, Link link, Date time) {
+        this.name = name;
+        this.desc = desc;
+        this.author = author;
+        this.link = link;
+        this.time = time;
+    }
+
+    /*----------------------------------*
+     Validation methods
+     *----------------------------------*/
+
+    public boolean isEqual(TrackMetadataVM target) {
+        return this.name.equals(target.name)
+                && this.desc.equals(target.desc)
+                && this.author.equals(target.author)
+                && this.link.isEqual(target.link)
+                && this.time.equals(target.time);
+    }
+
+    /*----------------------------------*
      Getters and Setters
      *----------------------------------*/
 

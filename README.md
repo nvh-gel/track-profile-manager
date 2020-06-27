@@ -28,3 +28,27 @@ src
     - beans.xml (contains beans definition)
     - data.sql (scripts for initialize h2 database)
 - test
+
+
+## Command
+
+To boot up project
+```shell script
+mvn spring-boot:run
+```
+
+To test the APIs
+- get latest tracks:
+```shell script
+curl http://localhost:8080/api/track
+```
+
+- get track details
+```shell script
+curl http://localhost:8080/api/track/<track-id>
+```
+
+- upload track file
+```shell script
+access upload page at http://localhost:8080
+```

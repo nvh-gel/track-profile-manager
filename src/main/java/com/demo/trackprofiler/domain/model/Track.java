@@ -30,6 +30,21 @@ public class Track {
     private List<TrackPoint> trackPoints;
 
     /*----------------------------------*
+     Constructors
+     *----------------------------------*/
+    public Track() {}
+
+    public Track(Integer trackId, String name, String description, String author, String url, String urlText, LocalDateTime time) {
+        this.trackId = trackId;
+        this.name = name;
+        this.description = description;
+        this.author = author;
+        this.url = url;
+        this.urlText = urlText;
+        this.time = time;
+    }
+
+    /*----------------------------------*
      Getters and Setters
      *----------------------------------*/
 

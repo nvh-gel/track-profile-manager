@@ -10,6 +10,31 @@ public class Link {
     private String url;
     private String text;
 
+    /*----------------------------------*
+     Constructors
+     *----------------------------------*/
+
+    public Link() {
+    }
+
+    public Link(String url, String text) {
+        this.url = url;
+        this.text = text;
+    }
+
+    /*----------------------------------*
+     Validation methods
+     *----------------------------------*/
+
+    public boolean isEqual(Link target) {
+        return this.url.equals(target.url)
+                && this.text.equals(target.text);
+    }
+
+    /*----------------------------------*
+     Getters and Setters
+     *----------------------------------*/
+
     @XmlAttribute(name = "href")
     public String getUrl() {
         return url;
@@ -27,4 +52,6 @@ public class Link {
     public void setText(String text) {
         this.text = text;
     }
+
+
 }
